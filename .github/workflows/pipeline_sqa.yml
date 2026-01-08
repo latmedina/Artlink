@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Descargar código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Instalar Ruby 3.3
         uses: ruby/setup-ruby@v1
