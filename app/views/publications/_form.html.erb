@@ -1,0 +1,39 @@
+<%= form_with(model: publication) do |form| %>
+  <% if publication.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(publication.errors.count, "error") %> impiden que la publicación sea creada:</h2>
+
+      <ul>
+        <% publication.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form">
+    <div>
+      <%= form.label :Nombre, style: "display: block" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :Descripción, style: "display: block" %>
+      <%= form.textarea :description, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.label :Precio, style: "display: block" %>
+      <%= form.number_field :price, class: "form-control" %>
+    </div>
+
+
+    <div>
+      <%= form.label :Imagen, style: "display: block" %>
+      <%= form.file_field :picture, class: "form-control-file" %>
+    </div>
+
+    <br><div>
+      <%= form.submit "Guardar", class:"btn btn-success" %>
+    </div>
+  </div>
+<% end %>

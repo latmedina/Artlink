@@ -1,0 +1,11 @@
+<% content_for :title, "New request" %>
+
+<h1>Solicitar Servicio</h1>
+
+<%= render "form", request: @request %>
+
+<br>
+
+<div>
+  <%= link_to "Cancelar", publication_path(@request.publication_id), class:"btn btn-secondary" %>
+</div>

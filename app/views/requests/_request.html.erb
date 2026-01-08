@@ -1,0 +1,29 @@
+<div class="solicitud">
+  <div class="imagen">
+    <p>
+      <%= image_tag(request.picture_url, width: 300) if request.picture? %>
+    </p>
+  </div>
+
+  <div class="texto">
+    <p>
+      <strong>Status:</strong>
+      <%= request.status %>
+    </p>
+
+    <p>
+      <strong>Title:</strong>
+      <%= request.title %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= request.description %>
+    </p>
+
+    <p>
+      <strong>Contact:</strong>
+      <%= request.contact %>
+    </p>
+  </div>
+</div>

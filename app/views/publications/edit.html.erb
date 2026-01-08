@@ -1,0 +1,11 @@
+<% content_for :title, "Editing publication" %>
+
+<h1>Editar Publicación</h1>
+
+<%= render "form", publication: @publication %>
+
+<br>
+
+<div>
+  <%= link_to "Cancelar", @publication, class:"btn btn-secondary" %>
+</div>

@@ -1,0 +1,55 @@
+<h1>Registrarse</h1>
+<div class="user">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(resource.errors.count, "error") %> impiden el registro:</h2>
+        <ul>
+          <% resource.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :Nombre_de_Usuario %>
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Email %>
+      <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "nombre@gmail.com" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Contraseña %>
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: "Mínimo 8 carácteres, debe incluir al menos un número y un carácter especial" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Confirmación_de_contraseña %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Registrarse", class: "btn btn-success", id: "register-button" %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <br>
+    <h4>¿Ya tienes una cuenta? ¡Inicia sesión!</h4>
+    <%= link_to "Ingresar", new_user_session_path, class: "btn btn-primary"%>
+  </div>
+</div>
+
+<script>
+  document.getElementById("register-button").addEventListener("click", function(event) {
+    // Esperar a que se envíe el formulario
+    setTimeout(function() {
+      // Redirigir a la página de inicio de sesión
+      window.location.href = "<%= new_user_session_path %>";
+    }, 1); // Cambia el tiempo si es necesario
+  });
+</script>

@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @publication %>
+
+<div class="buttons-container">
+  <% if current_user.id == @publication.user_id %>
+    <%= link_to "Editar publicación", edit_publication_path(@publication), class:"btn btn-primary" %> 
+    <%= button_to "Eliminar publicación", @publication, method: :delete, class:"btn btn-danger" %>
+    <%= link_to "Regresar", profile_path, class:"btn btn-secondary" %>
+  <%end%>
+  <% if current_user.id != @publication.user_id %>
+    <%= link_to "Regresar a inicio", root_path, class:"btn btn-secondary" %>
+    <%= link_to "Solicitar servicio", new_request_path(publication_id: @publication.id), class:"btn btn-secondary" %>
+  <%end%>
+</div>
+
+<p>
+  <strong>Calificación Promedio:</strong>
+  <div id="average-rating" data-score="<%= @average_rating %>"></div>
+</p>
+
+<script>
+  $(document).ready(function() {
+    $('#average-rating').raty({
+      path: 'https://cdnjs.cloudflare.com/ajax/libs/raty/2.7.1/images',
+      readOnly: true,
+      score: function() {
+        return $(this).data('score');
+      }
+    });
+  });
+</script>

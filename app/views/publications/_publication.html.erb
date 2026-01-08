@@ -1,0 +1,26 @@
+<div class="publicacion">
+  <div class="texto">
+    <p>
+      <strong>Título:</strong>
+      <%= publication.name %>
+    </p>
+
+    <p>
+      <strong>Publicado por:</strong> <%= publication.user.username %>
+    </p>
+
+    <p>
+      <strong>Descripción:</strong>
+      <%= publication.description %>
+    </p>
+    
+    <p>
+      <strong>Precio:</strong>
+      <%= publication.price %>
+    </p>
+  </div>
+
+  <div class="imagen">
+    <%= image_tag(publication.picture_url, width: 300) if publication.picture? %>
+  </div>
+</div>
