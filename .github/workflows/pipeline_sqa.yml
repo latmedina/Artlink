@@ -1,0 +1,42 @@
+name: CI SQA Definitivo
+
+on: [push, pull_request]
+
+jobs:
+  pruebas-automatizadas:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Configurar Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1' # Versión estándar segura
+          # No usamos bundler-cache true para evitar error de plataforma Windows/Linux
+
+      - name: Instalar librerías de Linux (SQLite)
+        run: sudo apt-get install -y libsqlite3-dev
+
+      - name: Instalar dependencias del proyecto
+        run: |
+          gem install bundler
+          # Esto ignora versiones de plataforma conflictivas
+          bundle config set --local deployment 'false'
+          bundle install
+
+      - name: Preparar Base de Datos
+        run: |
+          # Si falla la creación, no detiene el proceso (útil si ya existe)
+          bin/rails db:create RAILS_ENV=test || true
+          bin/rails db:migrate RAILS_ENV=test
+
+      - name: Ejecutar Pruebas (Detectando Framework)
+        run: |
+          # Intenta correr RSpec, si no existe, corre Minitest
+          if [ -d "spec" ]; then
+            bundle exec rspec
+          else
+            bundle exec rake test
+          fi
