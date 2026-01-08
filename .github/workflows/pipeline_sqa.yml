@@ -1,4 +1,4 @@
-name: CI SQA Final
+name: CI SQA Rails 8
 
 on: [push]
 
@@ -9,34 +9,32 @@ jobs:
       - name: Descargar código
         uses: actions/checkout@v3
 
-      - name: Instalar Ruby
+      - name: Instalar Ruby 3.3 (Requerido para Rails 8)
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Usamos una versión estándar
+          ruby-version: '3.3' # <--- AQUÍ ESTABA EL DETALLE
+          bundler-cache: false
 
       - name: Instalar librerías Linux
-        run: sudo apt-get install -y libsqlite3-dev
+        run: sudo apt-get install -y libsqlite3-dev yaml-lint
 
-      - name: Arreglar conflictos Windows/Linux
+      - name: Limpiar conflictos de Windows
         run: |
-          # Borramos el archivo que causa el conflicto de plataformas
+          # Borramos el candado de versiones de tu PC para crear uno de Linux
           rm -f Gemfile.lock
-          # Instalamos Bundler fresco
           gem install bundler
-          # Instalamos las dependencias generando un lockfile nuevo para Linux
           bundle install --jobs 4 --retry 3
 
       - name: Preparar Base de Datos
         run: |
-          # Usamos 'bundle exec' para evitar errores de permisos en carpeta bin
-          bundle exec rake db:create RAILS_ENV=test
-          bundle exec rake db:migrate RAILS_ENV=test
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Ejecutar Pruebas
         run: |
-          # Ejecuta los tests (detecta si es RSpec o Minitest automáticamente)
+          # Si tienes RSpec corre esto, si no, corre Minitest
           if [ -d "spec" ]; then
             bundle exec rspec
           else
-            bundle exec rake test
+            bundle exec rails test
           fi
