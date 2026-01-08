@@ -1,0 +1,44 @@
+name: CI SQA Rails 8 Final
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v3
+
+      - name: Instalar Ruby 3.3
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: false
+
+      - name: Instalar librerías Linux
+        run: |
+          # Actualizamos primero para evitar error 100
+          sudo apt-get update
+          # Instalamos solo lo necesario (SQLite y Vips que usa Rails 8)
+          sudo apt-get install -y libsqlite3-dev libvips
+
+      - name: Instalar dependencias Ruby
+        run: |
+          # Borramos el lockfile de Windows/Mac para evitar conflictos
+          rm -f Gemfile.lock
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Preparar Base de Datos
+        run: |
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Ejecutar Pruebas
+        run: |
+          # Detecta si usa RSpec o Test Unit
+          if [ -d "spec" ]; then
+            bundle exec rspec
+          else
+            bundle exec rails test
+          fi
