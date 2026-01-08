@@ -1,4 +1,4 @@
-name: CI SQA Rails 8
+name: CI SQA Rails 8 Final
 
 on: [push]
 
@@ -9,18 +9,22 @@ jobs:
       - name: Descargar código
         uses: actions/checkout@v3
 
-      - name: Instalar Ruby 3.3 (Requerido para Rails 8)
+      - name: Instalar Ruby 3.3
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3' # <--- AQUÍ ESTABA EL DETALLE
+          ruby-version: '3.3'
           bundler-cache: false
 
       - name: Instalar librerías Linux
-        run: sudo apt-get install -y libsqlite3-dev yaml-lint
-
-      - name: Limpiar conflictos de Windows
         run: |
-          # Borramos el candado de versiones de tu PC para crear uno de Linux
+          # Actualizamos primero para evitar error 100
+          sudo apt-get update
+          # Instalamos solo lo necesario (SQLite y Vips que usa Rails 8)
+          sudo apt-get install -y libsqlite3-dev libvips
+
+      - name: Instalar dependencias Ruby
+        run: |
+          # Borramos el lockfile de Windows/Mac para evitar conflictos
           rm -f Gemfile.lock
           gem install bundler
           bundle install --jobs 4 --retry 3
@@ -32,7 +36,7 @@ jobs:
 
       - name: Ejecutar Pruebas
         run: |
-          # Si tienes RSpec corre esto, si no, corre Minitest
+          # Detecta si usa RSpec o Test Unit
           if [ -d "spec" ]; then
             bundle exec rspec
           else
