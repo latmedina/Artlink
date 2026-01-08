@@ -1,13 +1,17 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  description: MyText
-  picture: MyString
-  price: 9.99
+  name: "Cuadro al Oleo"
+  description: "Pintura hermosa"
+  picture: "img1.jpg"
+  price: 50.00
+  user: one
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
-  name: MyString
-  description: MyText
-  picture: MyString
-  price: 9.99
+  name: "Escultura Moderna"
+  description: "Hecha de arcilla"
+  picture: "img2.jpg"
+  price: 120.50
+  user: two
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

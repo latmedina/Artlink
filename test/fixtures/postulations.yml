@@ -1,17 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  content: MyText
-  portfolio: MyString
-  sender_id: 1
-  receiver_id: 1
-  status: MyString
+  title: "Postulacion Uno"
+  content: "Quiero ser parte de la galería"
+  portfolio: "http://mi-portfolio.com"
+  sender: one  # Esto busca al usuario/artista 'one'
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
-  title: MyString
-  content: MyText
-  portfolio: MyString
-  sender_id: 1
-  receiver_id: 1
-  status: MyString
+  title: "Postulacion Dos"
+  content: "Mi arte es abstracto"
+  portfolio: "http://otro-portfolio.com"
+  sender: two
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

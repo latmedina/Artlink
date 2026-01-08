@@ -1,13 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  title: MyString
-  description: MyText
-  contact: MyString
-  picture: MyString
+  title: "Solicitud Uno"
+  description: "Texto de solicitud"
+  contact: "contacto@test.com"
+  picture: "ref.jpg"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
 two:
-  title: MyString
-  description: MyText
-  contact: MyString
-  picture: MyString
+  title: "Solicitud Dos"
+  description: "Texto de solicitud dos"
+  contact: "contacto2@test.com"
+  picture: "ref2.jpg"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

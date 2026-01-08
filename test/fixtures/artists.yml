@@ -1,11 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/artists.yml
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  email: "artista1@prueba.com"
+  encrypted_password: "password_falso_123" # Solo para cumplir el NOT NULL
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+two:
+  email: "artista2@prueba.com"
+  encrypted_password: "password_falso_123"
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
