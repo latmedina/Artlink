@@ -1,13 +1,2 @@
-# test/fixtures/artists.yml
-
-one:
-  email: "artista1@prueba.com"
-  encrypted_password: "password_falso_123" # Solo para cumplir el NOT NULL
-  created_at: <%= Time.now %>
-  updated_at: <%= Time.now %>
-
-two:
-  email: "artista2@prueba.com"
-  encrypted_password: "password_falso_123"
-  created_at: <%= Time.now %>
-  updated_at: <%= Time.now %>
+one: {}
+two: {}
