@@ -1,15 +1,7 @@
 one:
-  title: "Postulacion Uno"
-  content: "Quiero ser parte de la galería"
-  portfolio: "http://mi-portfolio.com"
-  sender: one  # Esto busca al usuario/artista 'one'
-  created_at: <%= Time.now %>
-  updated_at: <%= Time.now %>
+  title: "Postulacion Huerfana"
+  content: "No tengo artista"
 
 two:
-  title: "Postulacion Dos"
-  content: "Mi arte es abstracto"
-  portfolio: "http://otro-portfolio.com"
-  sender: two
-  created_at: <%= Time.now %>
-  updated_at: <%= Time.now %>
+  title: "Postulacion Huerfana 2"
+  content: "Yo tampoco"
