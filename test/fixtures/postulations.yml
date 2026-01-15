@@ -1,7 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
 one:
-  title: "Postulacion Huerfana"
-  content: "No tengo artista"
+  title: MyString
+  content: MyText
+  portfolio: MyString
+  sender_id: 1
+  receiver_id: 1
+  status: MyString
 
 two:
-  title: "Postulacion Huerfana 2"
-  content: "Yo tampoco"
+  title: MyString
+  content: MyText
+  portfolio: MyString
+  sender_id: 1
+  receiver_id: 1
+  status: MyString
